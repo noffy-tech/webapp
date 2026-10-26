@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "api/index.js",
   "engines": {
-    "node": "8.1.1",
+    "node": "24.x",
     "npm": "5.0.3"
   },
   "scripts": {
