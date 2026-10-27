@@ -1,13 +1,12 @@
-import "dotenv/config";
+import dotenv from "dotenv";
 import express from "express";
 import passport from "passport";
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-import keys from "./config/keys.js";
 
 const app = express();
-
+dotenv.config();
 // Validate Google OAuth credentials
-if (!keys.googleClientID || !keys.googleClientSecret) {
+if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   throw new Error(
     "Missing Google OAuth credentials. Check your GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET environment variables.",
   );
@@ -17,8 +16,8 @@ if (!keys.googleClientID || !keys.googleClientSecret) {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: keys.googleClientID,
-      clientSecret: keys.googleClientSecret,
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "/auth/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
